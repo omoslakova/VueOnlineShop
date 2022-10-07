@@ -13,6 +13,9 @@
 
 import Cart from './components/Cart.vue';
 import Item from './components/Item.vue';
+import { onMounted } from "@vue/runtime-core";
+import axios from 'axios';
+import {shallowRef} from "@vue/reactivity";
 
 export default {
   name: "App",
@@ -21,35 +24,22 @@ export default {
     Item,
   },
   setup() {
-    const products = [
-      {
-        id: 1,
-        name: 'Lancome',
-        image: 'https://vanille.by/assets/images/products/65048/large/lancome-la-vie-est-belle-2.jpg',
-        price: 250,
-      },
-      {
-        id: 2,
-        name: 'Bulgari',
-        image: 'https://allparfume.by/images/parfumes/bulgari_omnia_amethyste.jpg',
-        price: 250,
-      },
-      {
-        id: 3,
-        name: 'Lancome',
-        image: 'https://vanille.by/assets/images/products/65048/large/lancome-la-vie-est-belle-2.jpg',
-        price: 250,
-      }
-    ];
+    let products = shallowRef([]);
 
+      onMounted(() => {
+          axios
+          .get('https://dummyjson.com/products')
+          .then(response => {
+            products.value = response.data.products
+            console.log(response)
+          });
+      })
 
-
-    return {
-      products,
-   
-    };
-  },
-};
+        return {
+          products,
+        };
+        },
+      };
 
 </script>
 

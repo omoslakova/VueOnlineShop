@@ -2,7 +2,7 @@
   <div>
     <div>
       <p>
-        {{ product.name }}
+        {{ product.title }}
       </p>
       <p>
         Price: {{ product.price }} р.

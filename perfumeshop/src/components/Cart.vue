@@ -11,7 +11,6 @@ export default {
     CartItem,
   },
   setup() {
-
     return {
 
     };
