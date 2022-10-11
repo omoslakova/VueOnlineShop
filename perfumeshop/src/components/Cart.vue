@@ -1,5 +1,11 @@
 <template>
-
+<div>
+    <CartItem
+    v-for="(item) in cart"
+    :key="item.id"
+    :item="item"
+    />
+</div>
 </template>
 
 <script>
@@ -10,8 +16,16 @@ export default {
   components: {
     CartItem,
   },
-  setup() {
+  props: {
+        cart:{
+        type: Object,
+          required: true
+            },
+          },
+
+  setup(props) {
     return {
+
 
     };
   },

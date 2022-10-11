@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: "Item",
+  name: "Product",
   props: {
     product: {
       type: Object,
@@ -34,7 +34,6 @@ export default {
     }
     return {
       emitAddProduct
-
     };
 
   },
