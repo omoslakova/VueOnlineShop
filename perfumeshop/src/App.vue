@@ -1,15 +1,15 @@
 <template>
   <div>
-    <div
+    <p
         v-if="Object.keys(cart).length"
     >
-      Cart
-    </div>
-
+        Cart
+    </p>
   <Cart
       v-if="Object.keys(cart).length"
       :key="cart.id"
       :cart="cart"
+      @changeCartCount="changeCartCount"
   />
 </div>
   <div>
@@ -35,7 +35,7 @@ export default {
   components: {
     Cart,
     Product,
-  },
+    },
   setup() {
     const products = shallowRef([]);
 
@@ -48,22 +48,28 @@ export default {
       };
     };
 
+
+    const removeFromCart = (index) => {
+      delete cart.value
+    }
+
     onMounted(() => {
       axios
           .get('https://dummyjson.com/products')
           .then(response => {
             products.value = response.data.products
-            console.log(response)
           });
     })
 
     return {
       products,
-      addProduct,
       cart,
+      addProduct,
+      removeFromCart,
+
+            };
+      },
     };
-  },
-};
 
 </script>
 
