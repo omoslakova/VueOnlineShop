@@ -1,19 +1,21 @@
 <template>
-  <div>
-    <p>
+  <div class="cart-item">
+    <p class="cart-item__title">
       Name: {{ product.title }}
     </p>
-    <p>
-      Description: {{ product.description }}
-    </p>
-    <p>
+    <img
+        :src="product.images[0]"
+        :alt="product.title"
+        class="cart-item__img"
+    >
+    <p class="cart-item__price">
       Price: {{ product.price }}
     </p>
-    <p>
+    <div class="cart-item__quantity">
+      <p>
       Quantity:
-    </p>
-
-    <span>
+      </p>
+      <span>
         <span
             @click="changeCartCount(-1)"
         >
@@ -26,8 +28,10 @@
         +
         </span>
       </span>
+    </div>
     <button
-        @click=""
+        class="cart-item__btn-delete"
+        @click="emitDeleteItemFromCart"
     >
       DELETE
     </button>
@@ -44,10 +48,6 @@ export default {
       type: Object,
       required: true
     },
-    index: {
-      type: Number,
-      required: true
-    },
   },
   emits: ['changeCartCount', 'deleteFromCart'],
   setup(props, {emit}) {
@@ -58,13 +58,19 @@ export default {
         emit('changeCartCount')
     }
 
+    const emitDeleteItemFromCart = () => {
+      emit('deleteFromCart', props.item.product.id);
+    };
+    console.log(product.value.images[0])
+
     watch(
         () => count.value,
         (newCountValue) => {
         console.log('watch count', newCountValue);
         if (newCountValue === 0) {
-        emit('deleteFromCart');
+          emitDeleteItemFromCart();
         }
+        console.log(props.item.product.id);
     });
 
     const changeCartCount = (value) => {
@@ -76,11 +82,44 @@ export default {
       count,
       changeCartCount,
       emitChangeCartCount,
+      emitDeleteItemFromCart
     };
   },
 };
+
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
+.cart-item {
+  text-align: center;
+  &__quantity{
+    margin: 10px 0;
+  }
+  &__title {
+    font-weight: bold;
+  }
+  &__img {
+    width: 150px;
+    height: 100px;
+  }
+  &__price {
+    font-weight: bolder;
+    color: teal;
+  }
+  &__btn-delete {
+    background-color: white;
+    color: black;
+    border: 2px solid #e0e0e0;
+    border-radius: 4px;
+    width: 100px;
+    height: 30px;
+    font-weight: bold;
+    box-shadow: 0 0 4px 0 #e0e0e0;
+    &:hover {
+      box-shadow: 0 0 4px 0 teal;
+    }
+  }
+}
 
 </style>
