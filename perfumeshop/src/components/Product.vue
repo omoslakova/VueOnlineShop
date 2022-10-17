@@ -9,7 +9,7 @@
       <p class="product-info__product-title">
         {{ product.title }}
       </p>
-    <p>
+    <p class="product-info__product-description">
       {{ product.description }}
     </p>
       <p class="product-info__product-price">
@@ -57,29 +57,40 @@ export default {
 .product-item {
   text-align: center;
   border-radius: 6px;
-  padding: 20px 30px;
+  padding: 30px 20px 0;
   box-shadow: 0 0 8px 0 #e0e0e0;
-  display: flex;
-    &__img {
-    width: 400px;
-    height: 300px;
-    }
+
     &:hover {
       box-shadow: 0 0 8px 0 teal;
     }
+
+    &__img {
+       width: 300px;
+       height: 250px;
+       object-fit: contain;
+     }
 }
+
 .product-info {
   display: grid;
-  grid-template-rows: repeat(4, 1fr);
-  padding: 10px;
+  grid-template-rows: 50px 70px 60px 60px;
+  padding: 15px 20px 10px;
+
     &__product-title {
       font-weight: bold;
       font-size: 20px;
     }
+
+    &__product-description {
+      font-size: 17px;
+    }
+
     &__product-price {
       font-weight: bolder;
       color: teal;
+      font-size: 18px;
     }
+
     &__btn-add {
       background-color: white;
       color: black;
@@ -89,6 +100,7 @@ export default {
       height: 30px;
       font-weight: bold;
       box-shadow: 0 0 4px 0 #e0e0e0;
+
       &:hover {
         box-shadow: 0 0 4px 0 teal;
       }

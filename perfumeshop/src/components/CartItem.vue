@@ -61,7 +61,6 @@ export default {
     const emitDeleteItemFromCart = () => {
       emit('deleteFromCart', props.item.product.id);
     };
-    console.log(product.value.images[0])
 
     watch(
         () => count.value,
@@ -93,20 +92,26 @@ export default {
 
 .cart-item {
   text-align: center;
+
   &__quantity{
     margin: 10px 0;
   }
+
   &__title {
     font-weight: bold;
   }
+
   &__img {
     width: 150px;
     height: 100px;
+    object-fit: contain;
   }
+
   &__price {
     font-weight: bolder;
     color: teal;
   }
+
   &__btn-delete {
     background-color: white;
     color: black;

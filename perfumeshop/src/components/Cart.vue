@@ -15,9 +15,9 @@
       <p class="cart-info__total-price">
         Total: {{ cartTotalCost }} $
       </p>
-    <p class="cart-info__total-positions">
-      Positions: {{ cartTotalPositions }}
-    </p>
+      <p class="cart-info__total-positions">
+        Positions: {{ cartTotalPositions }}
+      </p>
       <button
           @click="emitToCloseCart"
           class="cart-info__btn-close"
@@ -58,9 +58,10 @@ export default {
     const emitToCloseCart = () => {
       emit('toCloseCart')
     };
-    console.log(props.cart);
 
-    const cartTotalPositions = Object.keys(props.cart).length;
+    const cartTotalPositions = computed(() => {
+      return Object.keys(props.cart).length;
+    });
 
     const cartTotalCost = computed(() => {
       return Object.values(props.cart).reduce((sum, cartItem) => {
@@ -76,31 +77,34 @@ export default {
       emitToCloseCart,
       cartTotalPositions
     };
-    },
-  };
+  },
+};
 
 </script>
 
 <style lang="scss" scoped>
 
-.cart-modal{
-  width: 1000px;
-  min-height: 700px;
+.cart-modal {
+  width: 900px;
+  min-height: 600px;
   position: fixed;
-    &__items {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 250px));
-    }
+  display: grid;
+  grid-template-rows: 1fr auto;
+
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 250px));
+  }
 }
 
 .cart-info {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, auto);
+  justify-content: end;
   grid-gap: 40px;
-  position: absolute;
-  top: 90%;
-  left: 60%;
   font-weight: bold;
+  padding: 20px 20px 15px 100px;
+
   &__btn-close {
     background-color: white;
     color: black;
@@ -109,7 +113,9 @@ export default {
     width: 100px;
     height: 30px;
     font-weight: bold;
+    margin-top: 10px;
   }
 }
+
 
 </style>
